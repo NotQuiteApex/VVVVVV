@@ -31,10 +31,11 @@ include $(DEVKITARM)/3ds_rules
 #     - icon.png
 #     - <libctru folder>/default_icon.png
 #---------------------------------------------------------------------------------
-TARGET		:=	VVVVVV-M&P
-BUILD		:=	build
-SOURCES		:=	src lodepng physfs tinyxml
-DATA		:=	data
+TARGET   := VVVVVV-M&P
+BUILD    := build
+SOURCES  := src lodepng physfs tinyxml
+INCLUDES := $(SOURCES)
+DATA     := data
 
 APP_TITLE       := VVVVVV Make&Play
 APP_DESCRIPTION := VVVVVV Make and Play edition for 3DS Homebrew
@@ -50,14 +51,14 @@ CFLAGS	:=	-g -Wall -O2 -mword-relocations \
 			-fomit-frame-pointer -ffunction-sections \
 			$(ARCH)
 
-CFLAGS	+=	$(INCLUDE) -DARM11 -D_3DS -DMAKEANDPLAY
+CFLAGS	+=	$(INCLUDE) -DARM11 -D_3DS -DMAKEANDPLAY `sdl-config --cflags`
 
 CXXFLAGS	:= $(CFLAGS) -fno-rtti -fno-exceptions -std=gnu++11
 
 ASFLAGS	:=	-g $(ARCH)
 LDFLAGS	=	-specs=3dsx.specs -g $(ARCH) -Wl,-Map,$(notdir $*.map)
 
-LIBS	:= -lctru -lm -lSDL -lSDL_mixer
+LIBS	:= -lctru -lm -lSDL_mixer `sdl-config --libs`
 
 #---------------------------------------------------------------------------------
 # list of directories containing libraries, this must be the top level containing

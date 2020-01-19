@@ -1,0 +1,13 @@
+# Build Directory #
+###################
+/build
+
+# 3DS Homebrew Files #
+######################
+*.elf
+*.3dsx
+*.smdh
+
+# Game data #
+#############
+data.zip
