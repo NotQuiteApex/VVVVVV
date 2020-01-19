@@ -1,22 +1,11 @@
-This is the source code to VVVVVV, version 2.0+. For more context about this release, see the [announcement](http://distractionware.com/blog/2020/01/vvvvvv-is-now-open-source/) on Terry's blog!
+# VVVVVV: Make and Play Edition: 3DS Homebrew
+A port of VVVVVV: Make and Play edition to Nintendo 3DS Homebrew.
 
-License
--------
-VVVVVV's source code is made available under a custom license. See [LICENSE.md](LICENSE.md) for more details.
+# Playing
+These builds come with all the code necessary to play the M&P edition, but you will have to download the data.zip file from [here](https://thelettervsixtim.es/makeandplay/). Place it in the same directory as the build binary, and you're good to go.
 
-In general, if you're interested in creating something that falls outside the license terms, get in touch with Terry and we'll talk about it!
+# Building
+Simply set up a 3DS Homebrew build environment and run `make` in your terminal. This will generate a build binary at the root of the repo directory.
 
-Authors
--------
-- Created by [Terry Cavanagh](http://distractionware.com/)
-- Room Names by [Bennett Foddy](http://www.foddy.net)
-- Music by [Magnus Pålsson](http://souleye.madtracker.net/)
-- Metal Soundtrack by [FamilyJules](http://familyjules7x.com/)
-- 2.0 Update (C++ Port) by [Simon Roth](http://www.machinestudios.co.uk)
-- 2.2 Update (SDL2/PhysicsFS/Steamworks port) by [Ethan Lee](http://www.flibitijibibo.com/)
-- Beta Testing by Sam Kaplan and Pauli Kohberger
-- Ending Picture by Pauli Kohberger
-
-Versions
-------------
-There are two versions of the VVVVVV source code available - the [desktop version](https://github.com/TerryCavanagh/VVVVVV/tree/master/desktop_version) (based on the C++ port, and currently live on Steam), and the [mobile version](https://github.com/TerryCavanagh/VVVVVV/tree/master/mobile_version) (based on a fork of the original flash source code, and currently live on iOS and Android).
+# License/Disclaimer Notice
+This code is licensed under the VVVVVV Source Code License v1.0, and can be read in the LICENSE.md file. Do not redistribute the data.zip file without express permission. This project uses SDL, *not* SDL2 (same for SDL Mixer). The icon is a recreation of the 3DS icon but rotated 90 degrees clockwise. This project was an experiment for me to see how well I could port someone else's code to an entirely different platform, and is intended for educational or personal use only.
