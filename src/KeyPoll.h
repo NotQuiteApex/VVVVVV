@@ -57,8 +57,8 @@ public:
 
 	bool isUp(SDL_Keycode key);
 
-	bool isDown(std::vector<SDL_GameControllerButton> buttons);
-	bool isDown(SDL_GameControllerButton button);
+	bool isDown(u32 buttons);
+	bool isDown(u32 button);
 	bool controllerButtonDown();
 	bool controllerWantsLeft(bool includeVert);
 	bool controllerWantsRight(bool includeVert);

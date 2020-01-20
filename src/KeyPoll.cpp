@@ -296,9 +296,10 @@ bool KeyPoll::isDown(u32 buttons)
 	return !!(buttons & buttonmap);
 }
 
-bool KeyPoll::isDown(SDL_GameControllerButton button)
+bool KeyPoll::isDown(u32 button)
 {
-	return buttonmap[button];
+	// just do it again.
+	return !!(buttons & buttonmap);
 }
 
 bool KeyPoll::controllerButtonDown()
