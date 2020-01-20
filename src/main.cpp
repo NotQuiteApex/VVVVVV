@@ -1,3 +1,6 @@
+#include <3ds.h>
+#include <citro2d.h>
+
 #include <SDL.h>
 #include "SoundSystem.h"
 
@@ -36,30 +39,34 @@ scriptclass script;
 
 int main(int argc, char *argv[])
 {
+    // Set up 3DS dependent stuff
+    gfxInitDefault();
+    C3D_Init(C3D_DEFAULT_CMDBUF_SIZE);
+    C3D_Init(C3D_DEFAULT_MAX_OBJECTS);
+    C2D_Prepare();
+
     if(!FILESYSTEM_init(argv[0]))
     {
         return 1;
     }
     SDL_Init(
-        SDL_INIT_VIDEO |
         SDL_INIT_AUDIO |
-        SDL_INIT_JOYSTICK |
-        SDL_INIT_GAMECONTROLLER
+        SDL_INIT_JOYSTICK
     );
 
-    if (argc > 2 && strcmp(argv[1], "-renderer") == 0)
-    {
-        SDL_SetHintWithPriority(SDL_HINT_RENDER_DRIVER, argv[2], SDL_HINT_OVERRIDE);
-    }
+    // if (argc > 2 && strcmp(argv[1], "-renderer") == 0)
+    // {
+    //     SDL_SetHintWithPriority(SDL_HINT_RENDER_DRIVER, argv[2], SDL_HINT_OVERRIDE);
+    // }
 
     // NETWORK_init();
 
     Screen gameScreen;
 
-	printf("\t\t\n");
-    printf("\t\t       VVVVVV\n");
-	printf("\t\t   Make & Play 3DS\n");
-	printf("\t\t\n");
+	printf("\n");
+	printf("             VVVVVV\n");
+	printf("         Make & Play 3DS\n");
+	printf("\n");
 	printf("####     8888888888888888     ####\n");
 	printf("####   88888888888888888888   ####\n");
 	printf("####   888888    8888    88   ####\n");
@@ -81,8 +88,8 @@ int main(int argc, char *argv[])
 	printf("####     888888    888888     ####\n");
 	printf("####     888888    888888     ####\n");
 	printf("####     888888    888888     ####\n");
-	printf("\t\t\n");
-	printf("\t\t\n");
+	printf("\n");
+	printf("\n");
 
     //Set up screen
 
@@ -242,7 +249,7 @@ int main(int argc, char *argv[])
     game.infocus = true;
     key.isActive = true;
 
-    while(!key.quitProgram)
+    while(aptMainLoop() && !key.quitProgram)
     {
 		//gameScreen.ClearScreen(0x00);
 
@@ -541,6 +548,11 @@ int main(int argc, char *argv[])
     // NETWORK_shutdown();
     SDL_Quit();
     FILESYSTEM_deinit();
+
+    // Wrap up 3DS stuff
+    C2D_Fini();
+    C3D_Fini();
+    gfxExit();
 
     return 0;
 }

@@ -69,54 +69,57 @@ void KeyPoll::disabletextentry()
 
 void KeyPoll::Poll()
 {
+	// Handle 3DS inputs
+	buttonmap = hidKeysHeld();
+
 	SDL_Event evt;
 	while (SDL_PollEvent(&evt))
 	{
 		/* Keyboard Input */
 		if (evt.type == SDL_KEYDOWN)
 		{
-			keymap[evt.key.keysym.sym] = true;
-			if (evt.key.keysym.sym == SDLK_BACKSPACE)
-			{
-				pressedbackspace = true;
-			}
-			else if (	(	evt.key.keysym.sym == SDLK_RETURN ||
-						evt.key.keysym.sym == SDLK_f	) &&
-#ifdef __APPLE__ /* OSX prefers the command key over the alt keys. -flibit */
-					keymap[SDLK_LGUI]	)
-#else
-					(	keymap[SDLK_LALT] ||
-						keymap[SDLK_RALT]	)	)
-#endif
-			{
-				toggleFullscreen = true;
-			}
+// 			keymap[evt.key.keysym.sym] = true;
+// 			if (evt.key.keysym.sym == SDLK_BACKSPACE)
+// 			{
+// 				pressedbackspace = true;
+// 			}
+// 			else if (	(	evt.key.keysym.sym == SDLK_RETURN ||
+// 						evt.key.keysym.sym == SDLK_f	) &&
+// #ifdef __APPLE__ /* OSX prefers the command key over the alt keys. -flibit */
+// 					keymap[SDLK_LGUI]	)
+// #else
+// 					(	keymap[SDLK_LALT] ||
+// 						keymap[SDLK_RALT]	)	)
+// #endif
+// 			{
+// 				toggleFullscreen = true;
+// 			}
 
-			if (textentrymode)
-			{
-				if (evt.key.keysym.sym == SDLK_BACKSPACE)
-				{
-					bool kbemptybefore = keybuffer.empty();
-					keybuffer = keybuffer.substr(0, keybuffer.length() - 1);
-					if (!kbemptybefore && keybuffer.empty())
-					{
-						linealreadyemptykludge = true;
-					}
-				}
-				else if (	evt.key.keysym.sym == SDLK_v &&
-						keymap[SDLK_LCTRL]	)
-				{
-					keybuffer += SDL_GetClipboardText();
-				}
-			}
-		}
-		else if (evt.type == SDL_KEYUP)
-		{
-			keymap[evt.key.keysym.sym] = false;
-			if (evt.key.keysym.sym == SDLK_BACKSPACE)
-			{
-				pressedbackspace = false;
-			}
+// 			if (textentrymode)
+// 			{
+// 				if (evt.key.keysym.sym == SDLK_BACKSPACE)
+// 				{
+// 					bool kbemptybefore = keybuffer.empty();
+// 					keybuffer = keybuffer.substr(0, keybuffer.length() - 1);
+// 					if (!kbemptybefore && keybuffer.empty())
+// 					{
+// 						linealreadyemptykludge = true;
+// 					}
+// 				}
+// 				else if (	evt.key.keysym.sym == SDLK_v &&
+// 						keymap[SDLK_LCTRL]	)
+// 				{
+// 					keybuffer += SDL_GetClipboardText();
+// 				}
+// 			}
+// 		}
+// 		else if (evt.type == SDL_KEYUP)
+// 		{
+// 			keymap[evt.key.keysym.sym] = false;
+// 			if (evt.key.keysym.sym == SDLK_BACKSPACE)
+// 			{
+// 				pressedbackspace = false;
+// 			}
 		}
 		else if (evt.type == SDL_TEXTINPUT)
 		{
@@ -208,68 +211,68 @@ void KeyPoll::Poll()
 				}
 			}
 		}
-		else if (evt.type == SDL_CONTROLLERDEVICEADDED)
-		{
-			SDL_GameController *toOpen = SDL_GameControllerOpen(evt.cdevice.which);
-			printf(
-				"Opened SDL_GameController ID #%i, %s\n",
-				evt.cdevice.which,
-				SDL_GameControllerName(toOpen)
-			);
-			controllers[SDL_JoystickInstanceID(SDL_GameControllerGetJoystick(toOpen))] = toOpen;
-		}
-		else if (evt.type == SDL_CONTROLLERDEVICEREMOVED)
-		{
-			SDL_GameController *toClose = controllers[evt.cdevice.which];
-			controllers.erase(evt.cdevice.which);
-			printf("Closing %s\n", SDL_GameControllerName(toClose));
-			SDL_GameControllerClose(toClose);
-		}
+		// else if (evt.type == SDL_CONTROLLERDEVICEADDED)
+		// {
+		// 	SDL_GameController *toOpen = SDL_GameControllerOpen(evt.cdevice.which);
+		// 	printf(
+		// 		"Opened SDL_GameController ID #%i, %s\n",
+		// 		evt.cdevice.which,
+		// 		SDL_GameControllerName(toOpen)
+		// 	);
+		// 	controllers[SDL_JoystickInstanceID(SDL_GameControllerGetJoystick(toOpen))] = toOpen;
+		// }
+		// else if (evt.type == SDL_CONTROLLERDEVICEREMOVED)
+		// {
+		// 	SDL_GameController *toClose = controllers[evt.cdevice.which];
+		// 	controllers.erase(evt.cdevice.which);
+		// 	printf("Closing %s\n", SDL_GameControllerName(toClose));
+		// 	SDL_GameControllerClose(toClose);
+		// }
 
 		/* Window Events */
-		else if (evt.type == SDL_WINDOWEVENT)
-		{
-			/* Window Resize */
-			if (evt.window.event == SDL_WINDOWEVENT_RESIZED)
-			{
-				resetWindow = true;
-			}
+		// else if (evt.type == SDL_WINDOWEVENT)
+		// {
+		// 	/* Window Resize */
+		// 	if (evt.window.event == SDL_WINDOWEVENT_RESIZED)
+		// 	{
+		// 		resetWindow = true;
+		// 	}
 
 			/* Window Focus */
-			else if (evt.window.event == SDL_WINDOWEVENT_FOCUS_GAINED)
-			{
-				isActive = true;
-				if (!useFullscreenSpaces)
-				{
-					SDL_Window *window = SDL_GetWindowFromID(evt.window.windowID);
-					wasFullscreen = SDL_GetWindowFlags(window);
-					SDL_SetWindowFullscreen(window, 0);
-				}
-				SDL_DisableScreenSaver();
-			}
-			else if (evt.window.event == SDL_WINDOWEVENT_FOCUS_LOST)
-			{
-				isActive = false;
-				if (!useFullscreenSpaces)
-				{
-					SDL_SetWindowFullscreen(
-						SDL_GetWindowFromID(evt.window.windowID),
-						wasFullscreen
-					);
-				}
-				SDL_EnableScreenSaver();
-			}
+		// 	else if (evt.window.event == SDL_WINDOWEVENT_FOCUS_GAINED)
+		// 	{
+		// 		isActive = true;
+		// 		if (!useFullscreenSpaces)
+		// 		{
+		// 			SDL_Window *window = SDL_GetWindowFromID(evt.window.windowID);
+		// 			wasFullscreen = SDL_GetWindowFlags(window);
+		// 			SDL_SetWindowFullscreen(window, 0);
+		// 		}
+		// 		SDL_DisableScreenSaver();
+		// 	}
+		// 	else if (evt.window.event == SDL_WINDOWEVENT_FOCUS_LOST)
+		// 	{
+		// 		isActive = false;
+		// 		if (!useFullscreenSpaces)
+		// 		{
+		// 			SDL_SetWindowFullscreen(
+		// 				SDL_GetWindowFromID(evt.window.windowID),
+		// 				wasFullscreen
+		// 			);
+		// 		}
+		// 		SDL_EnableScreenSaver();
+		// 	}
 
 			/* Mouse Focus */
-			else if (evt.window.event == SDL_WINDOWEVENT_ENTER)
-			{
-				SDL_DisableScreenSaver();
-			}
-			else if (evt.window.event == SDL_WINDOWEVENT_LEAVE)
-			{
-				SDL_EnableScreenSaver();
-			}
-		}
+		// 	else if (evt.window.event == SDL_WINDOWEVENT_ENTER)
+		// 	{
+		// 		SDL_DisableScreenSaver();
+		// 	}
+		// 	else if (evt.window.event == SDL_WINDOWEVENT_LEAVE)
+		// 	{
+		// 		SDL_EnableScreenSaver();
+		// 	}
+		// }
 
 		/* Quit Event */
 		else if (evt.type == SDL_QUIT)
