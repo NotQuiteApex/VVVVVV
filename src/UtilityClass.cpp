@@ -5,55 +5,55 @@
 #include <sstream>
 
 /* Used by UtilityClass::GCString to generate a button list */
-const char *GCChar(SDL_GameControllerButton button)
-{
-	if (button == SDL_CONTROLLER_BUTTON_A)
-	{
-		return "A";
-	}
-	else if (button == SDL_CONTROLLER_BUTTON_B)
-	{
-		return "B";
-	}
-	else if (button == SDL_CONTROLLER_BUTTON_X)
-	{
-		return "X";
-	}
-	else if (button == SDL_CONTROLLER_BUTTON_Y)
-	{
-		return "Y";
-	}
-	else if (button == SDL_CONTROLLER_BUTTON_BACK)
-	{
-		return "BACK";
-	}
-	else if (button == SDL_CONTROLLER_BUTTON_GUIDE)
-	{
-		return "GUIDE";
-	}
-	else if (button == SDL_CONTROLLER_BUTTON_START)
-	{
-		return "START";
-	}
-	else if (button == SDL_CONTROLLER_BUTTON_LEFTSTICK)
-	{
-		return "L3";
-	}
-	else if (button == SDL_CONTROLLER_BUTTON_RIGHTSTICK)
-	{
-		return "R3";
-	}
-	else if (button == SDL_CONTROLLER_BUTTON_LEFTSHOULDER)
-	{
-		return "LB";
-	}
-	else if (button == SDL_CONTROLLER_BUTTON_RIGHTSHOULDER)
-	{
-		return "RB";
-	}
-	SDL_assert(0 && "Unhandled button!");
-	return NULL;
-}
+// const char *GCChar(SDL_GameControllerButton button)
+// {
+// 	if (button == SDL_CONTROLLER_BUTTON_A)
+// 	{
+// 		return "A";
+// 	}
+// 	else if (button == SDL_CONTROLLER_BUTTON_B)
+// 	{
+// 		return "B";
+// 	}
+// 	else if (button == SDL_CONTROLLER_BUTTON_X)
+// 	{
+// 		return "X";
+// 	}
+// 	else if (button == SDL_CONTROLLER_BUTTON_Y)
+// 	{
+// 		return "Y";
+// 	}
+// 	else if (button == SDL_CONTROLLER_BUTTON_BACK)
+// 	{
+// 		return "BACK";
+// 	}
+// 	else if (button == SDL_CONTROLLER_BUTTON_GUIDE)
+// 	{
+// 		return "GUIDE";
+// 	}
+// 	else if (button == SDL_CONTROLLER_BUTTON_START)
+// 	{
+// 		return "START";
+// 	}
+// 	else if (button == SDL_CONTROLLER_BUTTON_LEFTSTICK)
+// 	{
+// 		return "L3";
+// 	}
+// 	else if (button == SDL_CONTROLLER_BUTTON_RIGHTSTICK)
+// 	{
+// 		return "R3";
+// 	}
+// 	else if (button == SDL_CONTROLLER_BUTTON_LEFTSHOULDER)
+// 	{
+// 		return "LB";
+// 	}
+// 	else if (button == SDL_CONTROLLER_BUTTON_RIGHTSHOULDER)
+// 	{
+// 		return "RB";
+// 	}
+// 	SDL_assert(0 && "Unhandled button!");
+// 	return NULL;
+// }
 
 int ss_toi( std::string _s )
 {
@@ -102,19 +102,19 @@ std::string UtilityClass::String( int _v )
 	return(os.str());
 }
 
-std::string UtilityClass::GCString(std::vector<SDL_GameControllerButton> buttons)
-{
-	std::string retval = "";
-	for (size_t i = 0; i < buttons.size(); i += 1)
-	{
-		retval += GCChar(buttons[i]);
-		if ((i + 1) < buttons.size())
-		{
-			retval += ",";
-		}
-	}
-	return retval;
-}
+// std::string UtilityClass::GCString(std::vector<SDL_GameControllerButton> buttons)
+// {
+// 	std::string retval = "";
+// 	for (size_t i = 0; i < buttons.size(); i += 1)
+// 	{
+// 		retval += GCChar(buttons[i]);
+// 		if ((i + 1) < buttons.size())
+// 		{
+// 			retval += ",";
+// 		}
+// 	}
+// 	return retval;
+// }
 
 std::string UtilityClass::twodigits( int t )
 {
@@ -173,7 +173,9 @@ std::string UtilityClass::number( int _t )
 
 bool UtilityClass::intersects( SDL_Rect A, SDL_Rect B )
 {
-	return (SDL_HasIntersection(&A, &B) == SDL_TRUE);
+	// https://stackoverflow.com/a/306316/
+	return (A.x < B.x + B.w && A.x + A.w > B.x &&
+			A.y > B.y + B.h && A.y + A.h < B.y);
 }
 
 void UtilityClass::updateglow()
