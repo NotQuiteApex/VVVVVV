@@ -75,7 +75,7 @@ public:
 
 private:
 	std::map<SDL_JoystickID, SDL_GameController*> controllers;
-	std::map<SDL_GameControllerButton, bool> buttonmap;
+	u32 buttonmap;
 	int xVel, yVel;
 	bool useFullscreenSpaces;
 	Uint32 wasFullscreen;

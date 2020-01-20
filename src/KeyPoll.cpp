@@ -289,16 +289,11 @@ bool KeyPoll::isUp(SDL_Keycode key)
 	return !keymap[key];
 }
 
-bool KeyPoll::isDown(std::vector<SDL_GameControllerButton> buttons)
+bool KeyPoll::isDown(u32 buttons)
 {
-	for (size_t i = 0; i < buttons.size(); i += 1)
-	{
-		if (buttonmap[buttons[i]])
-		{
-			return true;
-		}
-	}
-	return false;
+	// compare bitbang-able buttons (from ctrulib) to requested button, and then convert to bool
+	// hacky? yes. fun? also yes.
+	return !!(buttons & buttonmap);
 }
 
 bool KeyPoll::isDown(SDL_GameControllerButton button)

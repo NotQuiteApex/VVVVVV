@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include <3ds.h>
 #include "SDL.h"
 #include "Maths.h"
 #include "UtilityClass.h"
@@ -353,10 +354,10 @@ public:
     int numcustomlevelstats;
     bool customlevelstatsloaded;
 
-
-	std::vector<SDL_GameControllerButton> controllerButton_map;
-	std::vector<SDL_GameControllerButton> controllerButton_flip;
-	std::vector<SDL_GameControllerButton> controllerButton_esc;
+    // Hardcoded buttons are always fun :p
+    u32 controllerButton_map = KEY_START | KEY_SELECT;
+    u32 controllerButton_flip = KEY_A | KEY_B | KEY_Y | KEY_R | KEY_L;
+    u32 controllerButton_esc = KEY_SELECT; // Used in the editor.
 
     bool skipfakeload;
 };
