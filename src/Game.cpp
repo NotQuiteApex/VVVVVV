@@ -15,7 +15,7 @@
 
 #include "tinyxml.h"
 
-#include "Network.h"
+// #include "Network.h"
 
 #include "MakeAndPlay.h"
 
@@ -1386,12 +1386,12 @@ void Game::updatestate( Graphics& dwgfx, mapclass& map, entityclass& obj, Utilit
             {
                 bestrank[timetriallevel] = timetrialrank;
 								if(timetrialrank>=3){
-									if(timetriallevel==0) NETWORK_unlockAchievement("vvvvvvtimetrial_station1_fixed");
-									if(timetriallevel==1) NETWORK_unlockAchievement("vvvvvvtimetrial_lab_fixed");
-									if(timetriallevel==2) NETWORK_unlockAchievement("vvvvvvtimetrial_tower_fixed");
-									if(timetriallevel==3) NETWORK_unlockAchievement("vvvvvvtimetrial_station2_fixed");
-									if(timetriallevel==4) NETWORK_unlockAchievement("vvvvvvtimetrial_warp_fixed");
-									if(timetriallevel==5) NETWORK_unlockAchievement("vvvvvvtimetrial_final_fixed");
+									// if(timetriallevel==0) NETWORK_unlockAchievement("vvvvvvtimetrial_station1_fixed");
+									// if(timetriallevel==1) NETWORK_unlockAchievement("vvvvvvtimetrial_lab_fixed");
+									// if(timetriallevel==2) NETWORK_unlockAchievement("vvvvvvtimetrial_tower_fixed");
+									// if(timetriallevel==3) NETWORK_unlockAchievement("vvvvvvtimetrial_station2_fixed");
+									// if(timetriallevel==4) NETWORK_unlockAchievement("vvvvvvtimetrial_warp_fixed");
+									// if(timetriallevel==5) NETWORK_unlockAchievement("vvvvvvtimetrial_final_fixed");
 								}
             }
 
@@ -3090,7 +3090,7 @@ void Game::updatestate( Graphics& dwgfx, mapclass& map, entityclass& obj, Utilit
             break;
         case 3501:
             //Game complete!
-						NETWORK_unlockAchievement("vvvvvvgamecomplete");
+						// NETWORK_unlockAchievement("vvvvvvgamecomplete");
             unlocknum(5, map, dwgfx);
             crewstats[0] = true;
             state++;
@@ -3230,7 +3230,7 @@ void Game::updatestate( Graphics& dwgfx, mapclass& map, entityclass& obj, Utilit
             if (obj.flags[73] == 0)
             {
                 //flip mode complete
-								NETWORK_unlockAchievement("vvvvvvgamecompleteflip");
+								// NETWORK_unlockAchievement("vvvvvvgamecompleteflip");
                 unlock[19] = true;
             }
 
@@ -3247,18 +3247,18 @@ void Game::updatestate( Graphics& dwgfx, mapclass& map, entityclass& obj, Utilit
             }
 
 						if (bestgamedeaths > -1) {
-							if (bestgamedeaths <= 500) {
-							  NETWORK_unlockAchievement("vvvvvvcomplete500");
-							}
-							if (bestgamedeaths <= 250) {
-								NETWORK_unlockAchievement("vvvvvvcomplete250");
-							}
-							if (bestgamedeaths <= 100) {
-								NETWORK_unlockAchievement("vvvvvvcomplete100");
-							}
-							if (bestgamedeaths <= 50) {
-								NETWORK_unlockAchievement("vvvvvvcomplete50");
-							}
+							// if (bestgamedeaths <= 500) {
+							//   NETWORK_unlockAchievement("vvvvvvcomplete500");
+							// }
+							// if (bestgamedeaths <= 250) {
+							// 	NETWORK_unlockAchievement("vvvvvvcomplete250");
+							// }
+							// if (bestgamedeaths <= 100) {
+							// 	NETWORK_unlockAchievement("vvvvvvcomplete100");
+							// }
+							// if (bestgamedeaths <= 50) {
+							// 	NETWORK_unlockAchievement("vvvvvvcomplete50");
+							// }
 						}
 						
 

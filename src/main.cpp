@@ -24,7 +24,7 @@
 #include "preloader.h"
 
 #include "FileSystemUtils.h"
-#include "Network.h"
+// #include "Network.h"
 
 #include <stdio.h>
 #include <string.h>
@@ -52,36 +52,35 @@ int main(int argc, char *argv[])
         SDL_SetHintWithPriority(SDL_HINT_RENDER_DRIVER, argv[2], SDL_HINT_OVERRIDE);
     }
 
-    NETWORK_init();
+    // NETWORK_init();
 
     Screen gameScreen;
 
 	printf("\t\t\n");
+    printf("\t\t       VVVVVV\n");
+	printf("\t\t   Make & Play 3DS\n");
 	printf("\t\t\n");
-	printf("\t\t       VVVVVV\n");
-	printf("\t\t\n");
-	printf("\t\t\n");
-	printf("\t\t  8888888888888888  \n");
-	printf("\t\t88888888888888888888\n");
-	printf("\t\t888888    8888    88\n");
-	printf("\t\t888888    8888    88\n");
-	printf("\t\t88888888888888888888\n");
-	printf("\t\t88888888888888888888\n");
-	printf("\t\t888888            88\n");
-	printf("\t\t88888888        8888\n");
-	printf("\t\t  8888888888888888  \n");
-	printf("\t\t      88888888      \n");
-	printf("\t\t  8888888888888888  \n");
-	printf("\t\t88888888888888888888\n");
-	printf("\t\t88888888888888888888\n");
-	printf("\t\t88888888888888888888\n");
-	printf("\t\t8888  88888888  8888\n");
-	printf("\t\t8888  88888888  8888\n");
-	printf("\t\t    888888888888    \n");
-	printf("\t\t    8888    8888    \n");
-	printf("\t\t  888888    888888  \n");
-	printf("\t\t  888888    888888  \n");
-	printf("\t\t  888888    888888  \n");
+	printf("####     8888888888888888     ####\n");
+	printf("####   88888888888888888888   ####\n");
+	printf("####   888888    8888    88   ####\n");
+	printf("####   888888    8888    88   ####\n");
+	printf("####   88888888888888888888   ####\n");
+	printf("####   88888888888888888888   ####\n");
+	printf("####   888888            88   ####\n");
+	printf("####   88888888        8888   ####\n");
+	printf("####     8888888888888888     ####\n");
+	printf("####         88888888         ####\n");
+	printf("####     8888888888888888     ####\n");
+	printf("####   88888888888888888888   ####\n");
+	printf("####   88888888888888888888   ####\n");
+	printf("####   88888888888888888888   ####\n");
+	printf("####   8888  88888888  8888   ####\n");
+	printf("####   8888  88888888  8888   ####\n");
+	printf("####       888888888888       ####\n");
+	printf("####       8888    8888       ####\n");
+	printf("####     888888    888888     ####\n");
+	printf("####     888888    888888     ####\n");
+	printf("####     888888    888888     ####\n");
 	printf("\t\t\n");
 	printf("\t\t\n");
 
@@ -179,39 +178,39 @@ int main(int argc, char *argv[])
 
 		//Check to see if you've already unlocked some achievements here from before the update
 		if (game.swnbestrank > 0){
-		  if(game.swnbestrank >= 1) NETWORK_unlockAchievement("vvvvvvsupgrav5");
-			if(game.swnbestrank >= 2) NETWORK_unlockAchievement("vvvvvvsupgrav10");
-			if(game.swnbestrank >= 3) NETWORK_unlockAchievement("vvvvvvsupgrav15");
-			if(game.swnbestrank >= 4) NETWORK_unlockAchievement("vvvvvvsupgrav20");
-			if(game.swnbestrank >= 5) NETWORK_unlockAchievement("vvvvvvsupgrav30");
-			if(game.swnbestrank >= 6) NETWORK_unlockAchievement("vvvvvvsupgrav60");
+		 //  if(game.swnbestrank >= 1) NETWORK_unlockAchievement("vvvvvvsupgrav5");
+			// if(game.swnbestrank >= 2) NETWORK_unlockAchievement("vvvvvvsupgrav10");
+			// if(game.swnbestrank >= 3) NETWORK_unlockAchievement("vvvvvvsupgrav15");
+			// if(game.swnbestrank >= 4) NETWORK_unlockAchievement("vvvvvvsupgrav20");
+			// if(game.swnbestrank >= 5) NETWORK_unlockAchievement("vvvvvvsupgrav30");
+			// if(game.swnbestrank >= 6) NETWORK_unlockAchievement("vvvvvvsupgrav60");
 		}
 
-		if(game.unlock[5]) NETWORK_unlockAchievement("vvvvvvgamecomplete");
-		if(game.unlock[19]) NETWORK_unlockAchievement("vvvvvvgamecompleteflip");
-		if(game.unlock[20]) NETWORK_unlockAchievement("vvvvvvmaster");
+		// if(game.unlock[5]) NETWORK_unlockAchievement("vvvvvvgamecomplete");
+		// if(game.unlock[19]) NETWORK_unlockAchievement("vvvvvvgamecompleteflip");
+		// if(game.unlock[20]) NETWORK_unlockAchievement("vvvvvvmaster");
 
 		if (game.bestgamedeaths > -1) {
 			if (game.bestgamedeaths <= 500) {
-				NETWORK_unlockAchievement("vvvvvvcomplete500");
+				// NETWORK_unlockAchievement("vvvvvvcomplete500");
 			}
 			if (game.bestgamedeaths <= 250) {
-				NETWORK_unlockAchievement("vvvvvvcomplete250");
+				// NETWORK_unlockAchievement("vvvvvvcomplete250");
 			}
 			if (game.bestgamedeaths <= 100) {
-				NETWORK_unlockAchievement("vvvvvvcomplete100");
+				// NETWORK_unlockAchievement("vvvvvvcomplete100");
 			}
 			if (game.bestgamedeaths <= 50) {
-				NETWORK_unlockAchievement("vvvvvvcomplete50");
+				// NETWORK_unlockAchievement("vvvvvvcomplete50");
 			}
 		}
 
-		if(game.bestrank[0]>=3) NETWORK_unlockAchievement("vvvvvvtimetrial_station1_fixed");
-		if(game.bestrank[1]>=3) NETWORK_unlockAchievement("vvvvvvtimetrial_lab_fixed");
-		if(game.bestrank[2]>=3) NETWORK_unlockAchievement("vvvvvvtimetrial_tower_fixed");
-		if(game.bestrank[3]>=3) NETWORK_unlockAchievement("vvvvvvtimetrial_station2_fixed");
-		if(game.bestrank[4]>=3) NETWORK_unlockAchievement("vvvvvvtimetrial_warp_fixed");
-		if(game.bestrank[5]>=3) NETWORK_unlockAchievement("vvvvvvtimetrial_final_fixed");
+		// if(game.bestrank[0]>=3) NETWORK_unlockAchievement("vvvvvvtimetrial_station1_fixed");
+		// if(game.bestrank[1]>=3) NETWORK_unlockAchievement("vvvvvvtimetrial_lab_fixed");
+		// if(game.bestrank[2]>=3) NETWORK_unlockAchievement("vvvvvvtimetrial_tower_fixed");
+		// if(game.bestrank[3]>=3) NETWORK_unlockAchievement("vvvvvvtimetrial_station2_fixed");
+		// if(game.bestrank[4]>=3) NETWORK_unlockAchievement("vvvvvvtimetrial_warp_fixed");
+		// if(game.bestrank[5]>=3) NETWORK_unlockAchievement("vvvvvvtimetrial_final_fixed");
 
     entityclass obj;
     obj.init();
@@ -250,7 +249,7 @@ int main(int argc, char *argv[])
         time = SDL_GetTicks();
 
         // Update network per frame.
-        NETWORK_update();
+        // NETWORK_update();
 
         //framerate limit to 30
         Uint32 timetaken = time - timePrev;
@@ -539,7 +538,7 @@ int main(int argc, char *argv[])
     //SDL_FreeSurface( gameScreen );
 
     //Quit SDL
-    NETWORK_shutdown();
+    // NETWORK_shutdown();
     SDL_Quit();
     FILESYSTEM_deinit();
 

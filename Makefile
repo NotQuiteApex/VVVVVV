@@ -31,7 +31,7 @@ include $(DEVKITARM)/3ds_rules
 #     - icon.png
 #     - <libctru folder>/default_icon.png
 #---------------------------------------------------------------------------------
-TARGET   := VVVVVV-M&P
+TARGET   := VVVVVV-MP
 BUILD    := build
 SOURCES  := src lodepng physfs tinyxml
 INCLUDES := $(SOURCES)
