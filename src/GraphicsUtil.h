@@ -2,6 +2,7 @@
 #define GRAPHICSUTIL_H
 
 #include "SDL.h"
+#include <citro2d.h>
 
 struct colourTransform
 {
@@ -25,17 +26,17 @@ void BlitSurfaceStandard( SDL_Surface* _src, SDL_Rect* _srcRect, SDL_Surface* _d
 
 void BlitSurfaceColoured( SDL_Surface* _src, SDL_Rect* _srcRect, SDL_Surface* _dest, SDL_Rect* _destRect, colourTransform& ct );
 
-void FillRect( SDL_Surface* surface, const int x, const int y, const int w, const int h, const int r, int g, int b );
+void FillRect( C3D_RenderTarget* surface, const int x, const int y, const int w, const int h, const int r, int g, int b );
 
-void FillRect( SDL_Surface* surface, const int r, int g, int b );
+void FillRect( C3D_RenderTarget* surface, const int r, int g, int b );
 
-void FillRect( SDL_Surface* surface, const int color );
+void FillRect( C3D_RenderTarget* surface, const int color );
 
-void FillRect( SDL_Surface* surface, const int x, const int y, const int w, const int h, int rgba );
+void FillRect( C3D_RenderTarget* surface, const int x, const int y, const int w, const int h, int rgba );
 
-void FillRect( SDL_Surface* surface, SDL_Rect& rect, const int r, int g, int b );
+void FillRect( C3D_RenderTarget* surface, SDL_Rect& rect, const int r, int g, int b );
 
-void FillRect( SDL_Surface* surface, SDL_Rect rect, int rgba );
+void FillRect( C3D_RenderTarget* surface, SDL_Rect rect, int rgba );
 
 bool intersectRect(float left1, float right1, float bottom1, float top1, float left2, float right2, float bottom2, float top2);
 

@@ -45,6 +45,10 @@ int main(int argc, char *argv[])
     C3D_Init(C3D_DEFAULT_MAX_OBJECTS);
     C2D_Prepare();
 
+    // For now we'll use the bottom screen as a debug console,
+    // but later we'll use it for the map and stuff.
+    consoleInit(GFX_BOTTOM, NULL);
+
     if(!FILESYSTEM_init(argv[0]))
     {
         return 1;
@@ -54,19 +58,6 @@ int main(int argc, char *argv[])
         SDL_INIT_JOYSTICK
     );
 
-    // if (argc > 2 && strcmp(argv[1], "-renderer") == 0)
-    // {
-    //     SDL_SetHintWithPriority(SDL_HINT_RENDER_DRIVER, argv[2], SDL_HINT_OVERRIDE);
-    // }
-
-    // NETWORK_init();
-
-    Screen gameScreen;
-
-	printf("\n");
-	printf("             VVVVVV\n");
-	printf("         Make & Play 3DS\n");
-	printf("\n");
 	printf("####     8888888888888888     ####\n");
 	printf("####   88888888888888888888   ####\n");
 	printf("####   888888    8888    88   ####\n");
@@ -89,11 +80,12 @@ int main(int argc, char *argv[])
 	printf("####     888888    888888     ####\n");
 	printf("####     888888    888888     ####\n");
 	printf("\n");
+	printf("             VVVVVV\n");
+	printf("         Make & Play 3DS\n");
 	printf("\n");
 
     //Set up screen
-
-
+    Screen gameScreen;
 
 
     UtilityClass help;

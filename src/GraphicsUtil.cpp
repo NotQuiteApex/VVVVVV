@@ -309,118 +309,128 @@ void BlitSurfaceColoured(
 }
 
 
-int scrollamount = 0;
-bool isscrolling = 0;
-SDL_Surface* ApplyFilter( SDL_Surface* _src )
+// TODO: try to recreate this in a pica shader.
+// int scrollamount = 0;
+// bool isscrolling = 0;
+SDL_Surface* ApplyFilter( SDL_Surface* _src ) { return _src; }
+// {
+// 	SDL_Surface* _ret = SDL_CreateRGBSurface(_src->flags, _src->w, _src->h, 32,
+// 		_src->format->Rmask, _src->format->Gmask, _src->format->Bmask, _src->format->Amask);
+
+// 	if (rand() % 4000 < 8)
+// 	{
+// 		isscrolling = true;
+// 	}
+
+// 	if(isscrolling == true)
+// 	{
+// 		scrollamount += 20;
+// 		if(scrollamount > 240)
+// 		{
+// 			scrollamount = 0;
+// 			isscrolling = false;
+// 		}
+// 	}
+
+// 	int redOffset = rand() % 4;
+
+// 	for(int x = 0; x < _src->w; x++)
+// 	{
+// 		for(int y = 0; y < _src->h; y++)
+// 		{
+// 			int sampley = (y + scrollamount )% 240;
+
+// 			Uint32 pixel = ReadPixel(_src, x,sampley);
+
+// 			Uint8 green = (pixel & _src->format->Gmask) >> 8;
+// 			Uint8 blue = (pixel & _src->format->Bmask) >> 0;
+
+// 			Uint32 pixelOffset = ReadPixel(_src, std::min(x+redOffset, 319), sampley) ;
+// 			Uint8 red = (pixelOffset & _src->format->Rmask) >> 16 ;
+
+// 			if(isscrolling && sampley > 220 && ((rand() %10) < 4))
+// 			{
+// 				red = std::min(int(red+(fRandom() * 0.6)  * 254) , 255);
+// 				green = std::min(int(green+(fRandom() * 0.6)  * 254) , 255);
+// 				blue = std::min(int(blue+(fRandom() * 0.6)  * 254) , 255);
+// 			}
+// 			else
+// 			{
+// 				red = std::min(int(red+(fRandom() * 0.2)  * 254) , 255);
+// 				green = std::min(int(green+(fRandom() * 0.2)  * 254) , 255);
+// 				blue = std::min(int(blue+(fRandom() * 0.2)  * 254) , 255);
+// 			}
+
+
+// 			if(y % 2 == 0)
+// 			{
+// 				red = static_cast<Uint8>(red / 1.2f);
+// 				green = static_cast<Uint8>(green / 1.2f);
+// 				blue =  static_cast<Uint8>(blue / 1.2f);
+// 			}
+
+// 			int distX =  static_cast<int>((abs (160.0f -x ) / 160.0f) *16);
+// 			int distY =  static_cast<int>((abs (120.0f -y ) / 120.0f)*32);
+
+// 			red = std::max(red - ( distX +distY), 0);
+// 			green = std::max(green - ( distX +distY), 0);
+// 			blue = std::max(blue - ( distX +distY), 0);
+
+// 			Uint32 finalPixel = ((red<<16) + (green<<8) + (blue<<0)) | (pixel &_src->format->Amask);
+// 			DrawPixel(_ret,x,y,  finalPixel);
+
+// 		}
+// 	}
+// return _ret;
+// }
+
+void FillRect( C3D_RenderTarget* _surface, const int _x, const int _y, const int _w, const int _h, const int r, int g, int b )
 {
-	SDL_Surface* _ret = SDL_CreateRGBSurface(_src->flags, _src->w, _src->h, 32,
-		_src->format->Rmask, _src->format->Gmask, _src->format->Bmask, _src->format->Amask);
-
-	if (rand() % 4000 < 8)
-	{
-		isscrolling = true;
-	}
-
-	if(isscrolling == true)
-	{
-		scrollamount += 20;
-		if(scrollamount > 240)
-		{
-			scrollamount = 0;
-			isscrolling = false;
-		}
-	}
-
-	int redOffset = rand() % 4;
-
-	for(int x = 0; x < _src->w; x++)
-	{
-		for(int y = 0; y < _src->h; y++)
-		{
-			int sampley = (y + scrollamount )% 240;
-
-			Uint32 pixel = ReadPixel(_src, x,sampley);
-
-			Uint8 green = (pixel & _src->format->Gmask) >> 8;
-			Uint8 blue = (pixel & _src->format->Bmask) >> 0;
-
-			Uint32 pixelOffset = ReadPixel(_src, std::min(x+redOffset, 319), sampley) ;
-			Uint8 red = (pixelOffset & _src->format->Rmask) >> 16 ;
-
-			if(isscrolling && sampley > 220 && ((rand() %10) < 4))
-			{
-				red = std::min(int(red+(fRandom() * 0.6)  * 254) , 255);
-				green = std::min(int(green+(fRandom() * 0.6)  * 254) , 255);
-				blue = std::min(int(blue+(fRandom() * 0.6)  * 254) , 255);
-			}
-			else
-			{
-				red = std::min(int(red+(fRandom() * 0.2)  * 254) , 255);
-				green = std::min(int(green+(fRandom() * 0.2)  * 254) , 255);
-				blue = std::min(int(blue+(fRandom() * 0.2)  * 254) , 255);
-			}
-
-
-			if(y % 2 == 0)
-			{
-				red = static_cast<Uint8>(red / 1.2f);
-				green = static_cast<Uint8>(green / 1.2f);
-				blue =  static_cast<Uint8>(blue / 1.2f);
-			}
-
-			int distX =  static_cast<int>((abs (160.0f -x ) / 160.0f) *16);
-			int distY =  static_cast<int>((abs (120.0f -y ) / 120.0f)*32);
-
-			red = std::max(red - ( distX +distY), 0);
-			green = std::max(green - ( distX +distY), 0);
-			blue = std::max(blue - ( distX +distY), 0);
-
-			Uint32 finalPixel = ((red<<16) + (green<<8) + (blue<<0)) | (pixel &_src->format->Amask);
-			DrawPixel(_ret,x,y,  finalPixel);
-
-		}
-	}
-return _ret;
+    u32 clr = C2D_Color32(r, g, b, 255);
+    C2D_DrawRectSolid(_x, _y, 0, _w, _h, clr);
+    // SDL_Rect rect = {Sint16(_x),Sint16(_y),Sint16(_w),Sint16(_h)};
+    // Uint32 color;
+    // color = SDL_MapRGB(_surface->format, r, g, b);
+    // SDL_FillRect(_surface, &rect, color);
 }
 
-void FillRect( SDL_Surface* _surface, const int _x, const int _y, const int _w, const int _h, const int r, int g, int b )
+void FillRect( C3D_RenderTarget* _surface, const int r, int g, int b )
 {
-    SDL_Rect rect = {Sint16(_x),Sint16(_y),Sint16(_w),Sint16(_h)};
-    Uint32 color;
-    color = SDL_MapRGB(_surface->format, r, g, b);
-    SDL_FillRect(_surface, &rect, color);
+    u32 clr = C2D_Color32(r, g, b, 255);
+    C2D_TargetClear(_surface, clr);
+    // SDL_Rect rect = {0,0,Uint16(_surface->w) ,Uint16(_surface->h) };
+    // Uint32 color;
+    // color = SDL_MapRGB(_surface->format, r, g, b);
+    // SDL_FillRect(_surface, &rect, color);
 }
 
-void FillRect( SDL_Surface* _surface, const int r, int g, int b )
+void FillRect( C3D_RenderTarget* _surface, const int color )
 {
-    SDL_Rect rect = {0,0,Uint16(_surface->w) ,Uint16(_surface->h) };
-    Uint32 color;
-    color = SDL_MapRGB(_surface->format, r, g, b);
-    SDL_FillRect(_surface, &rect, color);
+    C2D_TargetClear(_surface, color);
+    // SDL_Rect rect = {0,0,Uint16(_surface->w) ,Uint16(_surface->h) };
+    // SDL_FillRect(_surface, &rect, color);
 }
 
-void FillRect( SDL_Surface* _surface, const int color )
+void FillRect( C3D_RenderTarget* _surface, const int x, const int y, const int w, const int h, int rgba )
 {
-    SDL_Rect rect = {0,0,Uint16(_surface->w) ,Uint16(_surface->h) };
-    SDL_FillRect(_surface, &rect, color);
+    C2D_DrawRectSolid(x, y, 0, w, h, rgba);
+    // SDL_Rect rect = {Sint16(x)  ,Sint16(y) ,Sint16(w) ,Sint16(h) };
+    // SDL_FillRect(_surface, &rect, rgba);
 }
 
-void FillRect( SDL_Surface* _surface, const int x, const int y, const int w, const int h, int rgba )
+void FillRect( C3D_RenderTarget* _surface, SDL_Rect& rect, const int r, int g, int b )
 {
-    SDL_Rect rect = {Sint16(x)  ,Sint16(y) ,Sint16(w) ,Sint16(h) };
-    SDL_FillRect(_surface, &rect, rgba);
+    u32 rgba = C2D_Color32(r, g, b, 255);
+    C2D_DrawRectSolid(rect.x, rect.y, 0, rect.w, rect.h, rgba);
+    // Uint32 color;
+    // color = SDL_MapRGB(_surface->format, r, g, b);
+    // SDL_FillRect(_surface, &_rect, color);
 }
 
-void FillRect( SDL_Surface* _surface, SDL_Rect& _rect, const int r, int g, int b )
+void FillRect( C3D_RenderTarget* _surface, SDL_Rect rect, int rgba )
 {
-    Uint32 color;
-    color = SDL_MapRGB(_surface->format, r, g, b);
-    SDL_FillRect(_surface, &_rect, color);
-}
-
-void FillRect( SDL_Surface* _surface, SDL_Rect rect, int rgba )
-{
-    SDL_FillRect(_surface, &rect, rgba);
+    C2D_DrawRectSolid(rect.x, rect.y, 0, rect.w, rect.h, rgba);
+    // SDL_FillRect(_surface, &rect, rgba);
 }
 
 bool intersectRect( float left1, float right1, float bottom1, float top1, float left2, float right2, float bottom2, float top2 )
